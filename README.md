@@ -1,3 +1,5 @@
+clone from https://gitlab.com/jwegner/netbox-utilities
+
 # netbox-utilities
 Utilities for Netbox management
 
