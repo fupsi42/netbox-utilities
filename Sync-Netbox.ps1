@@ -40,7 +40,7 @@ $VerbosePreference = "Continue"
 
 # store common paths in variables for URI creation
 # update for your Netbox instance
-$URIBase = "https://netbox.example.com/api"
+$URIBase = "https://ne-netbox.grolman.de/api"
 $ClustersPath = "/virtualization/clusters"
 $VirtualMachinesPath = "/virtualization/virtual-machines"
 $PlatformsPath = "/dcim/platforms"
@@ -605,19 +605,19 @@ function Sync-Netbox {
 Import-Module VMware.PowerCLI
 
 # Prompt for vCenter credential when running manually
-#$Credential = Get-Credential
+$Credential = Get-Credential
 
 # If running as a scheduled task, ideally you can use a service account
 # that can login to both Windows and vCenter with the account's Kerberos ticket
 # In that case, you can remove the -Credential from the above Connect-VIServer call
 # If running manually as a different user, specify the connection credential
-#Connect-VIServer -Server vcenter.example.com -Credential $Credential
-Connect-VIServer -Server vcenter.example.com
+Connect-VIServer -Server ne-vcenter03 -Credential $Credential
+#Connect-VIServer -Server ne-vcenter03.grolman.de
 
 # create your own token at your Netbox instance, e.g. https://netbox.example.com/user/api-tokens/
 # You may need to assign addtional user permissions at https://netbox.example.com/admin/auth/user/
 # since API permissions are not inherited from LDAP group permissions
-$Token = "insert-token-generated-above"
+$Token = ""
 
 Sync-Netbox -Token $Token
 
